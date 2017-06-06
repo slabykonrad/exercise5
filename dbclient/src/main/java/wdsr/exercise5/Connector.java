@@ -88,9 +88,39 @@ public class Connector {
 		FacultyConnection.dropTable(connection);
 	}
 	
-	public static void getAll(){
+	public static void getAllStudentsQuery1(){
 		try {
-			ResultSet res = connection.prepareStatement("SELECT * FROM Class").executeQuery();
+			ResultSet res = connection.prepareStatement("SELECT id, name FROM Student").executeQuery();
+			log.info("Query 1 - get all students:");
+			while (res.next()) {
+                log.info("id= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
+            }
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+		} 
+	}
+	
+	public static void getAllStudentsWithoutSubjectQuery2(){
+		try {
+			ResultSet res = connection.prepareStatement("SELECT s.id, s.name, e.class_key_id "
+					+ "FROM Student s FULL JOIN Enrollment e on e.student_key_id=s.id "
+					+ "WHERE e.class_key_id IS NULL").executeQuery();
+			log.info("Query 2 - get all students without subject:");
+			while (res.next()) {
+                log.info("id= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
+            }
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+		} 
+	}
+	
+	public static void getAllFemaleStudentsQuery3(){
+		try {
+			ResultSet res = connection.prepareStatement("SELECT s.id, s.name, s.sex, e.class_key_id FROM Student s "
+					+ "FULL JOIN Enrollment e on e.student_key_id=s.id "
+					+ "WHERE s.sex like 'female' "
+					+ "AND e.class_key_id = 1002").executeQuery();
+			log.info("Query 3 - get all female students:");
 			while (res.next()) {
                 log.info("id= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
             }

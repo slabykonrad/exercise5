@@ -14,7 +14,7 @@ public class StudentConnection {
 	
 	public static void createTable(Connection connection){
 		try {
-			connection.prepareStatement("CREATE TABLE Student (" +
+			connection.prepareStatement("CREATE TABLE IF NOT EXISTS Student (" +
 			        "id INTEGER PRIMARY KEY generated always as identity (START WITH 1), name VARCHAR(20)," + 
 					"sex VARCHAR(10), age INTEGER, level INTEGER)").executeUpdate();
 			log.info("Created table Student");

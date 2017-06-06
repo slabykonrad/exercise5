@@ -14,7 +14,7 @@ public class FacultyConnection {
 	
 	public static void createTable(Connection connection){
 		try {
-			connection.prepareStatement("CREATE TABLE Faculty (" +
+			connection.prepareStatement("CREATE TABLE IF NOT EXISTS Faculty (" +
 			        "id INTEGER PRIMARY KEY generated always as identity (START WITH 100), "
 			        + "name VARCHAR(50))").executeUpdate();
 			log.info("Created table Faculty");

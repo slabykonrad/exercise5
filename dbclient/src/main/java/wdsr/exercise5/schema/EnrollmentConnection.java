@@ -14,7 +14,7 @@ private static final Logger log = LoggerFactory.getLogger(EnrollmentConnection.c
 	
 	public static void createTable(Connection connection){
 		try {
-			connection.prepareStatement("CREATE TABLE Enrollment ( student_key_id "
+			connection.prepareStatement("CREATE TABLE IF NOT EXISTS Enrollment ( student_key_id "
 					+ "INTEGER FOREIGN KEY REFERENCES Student (id), "
 					+ "class_key_id INTEGER FOREIGN KEY REFERENCES Class (id))").executeUpdate();
 			log.info("Created table Enrollment");

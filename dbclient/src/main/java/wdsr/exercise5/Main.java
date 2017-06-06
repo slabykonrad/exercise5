@@ -41,6 +41,10 @@ public class Main {
 		Connector.insertElementIntoEnrollmentTable(4, 1002);
 		Connector.insertElementIntoEnrollmentTable(4, 1003);
 		
+		Connector.getAllStudentsQuery1();
+		Connector.getAllStudentsWithoutSubjectQuery2();
+		Connector.getAllFemaleStudentsQuery3();
+		
 		Connector.closeConnection();
 		
 		log.info("End connection");
