@@ -16,7 +16,7 @@ public class ClassConnection {
 		try {
 			connection.prepareStatement("CREATE TABLE IF NOT EXISTS Class (" +
 			        "id INTEGER PRIMARY KEY generated always as identity (START WITH 1000), "
-			        + "name VARCHAR(50)," + "faculty_key_id INTEGER FOREIGN KEY REFERENCES Faculty (id))")
+			        + "name VARCHAR(50), " + "faculty_key_id INTEGER FOREIGN KEY REFERENCES Faculty (id))")
 					.executeUpdate();
 			log.info("Created table Class");
 		} catch (SQLException e) {

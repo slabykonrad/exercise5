@@ -44,6 +44,8 @@ public class Main {
 		Connector.getAllStudentsQuery1();
 		Connector.getAllStudentsWithoutSubjectQuery2();
 		Connector.getAllFemaleStudentsQuery3();
+		Connector.getAllFacultiesNamesQuery4();
+		Connector.getTheEldestPersonQuery5();
 		
 		Connector.closeConnection();
 		

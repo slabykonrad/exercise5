@@ -91,9 +91,9 @@ public class Connector {
 	public static void getAllStudentsQuery1(){
 		try {
 			ResultSet res = connection.prepareStatement("SELECT id, name FROM Student").executeQuery();
-			log.info("Query 1 - get all students:");
+			log.info("Get all students -> Query 1:");
 			while (res.next()) {
-                log.info("id= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
+                log.info("pkey= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
             }
 		} catch (SQLException e) {
 			log.error(e.getMessage());
@@ -105,9 +105,9 @@ public class Connector {
 			ResultSet res = connection.prepareStatement("SELECT s.id, s.name, e.class_key_id "
 					+ "FROM Student s FULL JOIN Enrollment e on e.student_key_id=s.id "
 					+ "WHERE e.class_key_id IS NULL").executeQuery();
-			log.info("Query 2 - get all students without subject:");
+			log.info("Get all students without subject -> Query 2:");
 			while (res.next()) {
-                log.info("id= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
+                log.info("pkey= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
             }
 		} catch (SQLException e) {
 			log.error(e.getMessage());
@@ -120,9 +120,38 @@ public class Connector {
 					+ "FULL JOIN Enrollment e on e.student_key_id=s.id "
 					+ "WHERE s.sex like 'female' "
 					+ "AND e.class_key_id = 1002").executeQuery();
-			log.info("Query 3 - get all female students:");
+			log.info("Get all female students -> Query 3:");
 			while (res.next()) {
-                log.info("id= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
+                log.info("pkey= " + res.getInt("id") + ", " + "name= " + res.getString("name"));
+            }
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+		} 
+	}
+	
+	public static void getAllFacultiesNamesQuery4(){
+		try {
+			ResultSet res = connection.prepareStatement("SELECT f.name, e.class_key_id FROM Faculty f "
+					+ "JOIN Class c on c.faculty_key_id=f.id "
+					+ "FULL JOIN Enrollment e on e.class_key_id=c.id "
+					+ "WHERE e.class_key_id IS NULL").executeQuery();
+			log.info("Get all faculties names -> Query 4:");
+			while (res.next()) {
+                log.info("name= " + res.getString("name"));
+            }
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+		} 
+	}
+	
+	public static void getTheEldestPersonQuery5(){
+		try {
+			ResultSet res = connection.prepareStatement("SELECT MAX(s.age) as theEldest FROM Student s "
+					+ "JOIN Enrollment e on s.id=e.student_key_id "
+					+ "WHERE e.class_key_id = 1000").executeQuery();
+			log.info("Get the eldest person -> Query 5:");
+			while (res.next()) {
+                log.info("age= " + res.getString("theEldest"));
             }
 		} catch (SQLException e) {
 			log.error(e.getMessage());
